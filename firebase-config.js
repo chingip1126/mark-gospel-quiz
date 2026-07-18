@@ -3,13 +3,13 @@
 // 3. 不要把私人牧養資料放進資料庫；本網站只儲存暱稱和分數。
 
 export const firebaseConfig = {
-  apiKey: "PASTE_YOUR_API_KEY_HERE",
-  authDomain: "PASTE_YOUR_PROJECT.firebaseapp.com",
-  databaseURL: "https://PASTE_YOUR_PROJECT-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "PASTE_YOUR_PROJECT",
-  storageBucket: "PASTE_YOUR_PROJECT.firebasestorage.app",
-  messagingSenderId: "PASTE_YOUR_SENDER_ID",
-  appId: "PASTE_YOUR_APP_ID"
+apiKey: "AIzaSyBCD3zeYdEU5QbQ6dhqbvgRRJWkl7wPEu4",
+authDomain: "mark-gospel-quiz.firebaseapp.com",
+projectId: "mark-gospel-quiz",
+storageBucket: "mark-gospel-quiz.firebasestorage.app",
+messagingSenderId: "57489876607",
+appId: "1:57489876607:web:dd4f1cc9977046490f814a",
+measurementId: "G-RB01F30D6J"
 };
 
 export const isFirebaseConfigured =
