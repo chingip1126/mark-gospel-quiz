@@ -14,6 +14,6 @@ measurementId: "G-RB01F30D6J"
 
 export const isFirebaseConfigured =
   Boolean(firebaseConfig.apiKey) &&
-  !firebaseConfig.apiKey.includes("PASTE_") &&
+  !firebaseConfig.apiKey.includes("AIzaSyBCD3zeYdEU5QbQ6dhqbvgRRJWkl7wPEu4") &&
   Boolean(firebaseConfig.databaseURL) &&
-  !firebaseConfig.databaseURL.includes("PASTE_");
+  !firebaseConfig.databaseURL.includes("https://mark-gospel-quiz-default-rtdb.asia-southeast1.firebasedatabase.app/");
