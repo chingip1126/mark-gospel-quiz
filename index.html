@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#163b65">
+  <meta name="description" content="馬可福音查經系列手機問答與即時排行榜">
+  <title>MARK 行動查經｜馬可福音問答</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="site-header">
+      <button class="brand-button" id="brandHome" type="button" aria-label="返回首頁">
+        <span class="brand-mark">M</span>
+        <span><strong>MARK 行動查經</strong><small>馬可福音問答系列</small></span>
+      </button>
+      <div class="connection-pill" id="connectionPill"><span class="status-dot"></span><span id="connectionText">正在連線</span></div>
+    </header>
+
+    <main class="main-content">
+      <section class="screen active" id="homeScreen">
+        <div class="hero card">
+          <p class="eyebrow">FOLLOW JESUS · 跟住耶穌行</p>
+          <h1>用問答重溫經文，<br>一齊睇見耶穌。</h1>
+          <p class="hero-copy">每人用自己的手機作答，不設速度加分；答對八成或以上，就會獲得完成獎勵提示。</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" id="goHost" type="button">我是主持人</button>
+            <button class="btn btn-secondary" id="goJoin" type="button">加入問答</button>
+          </div>
+          <button class="text-button" id="startDemo" type="button">先用單機示範試玩</button>
+        </div>
+        <div class="feature-grid">
+          <article class="mini-card"><span class="feature-icon">📱</span><h2>各自手機作答</h2><p>輸入暱稱和房間碼即可參與，不需註冊帳戶。</p></article>
+          <article class="mini-card"><span class="feature-icon">🏆</span><h2>即時排行榜</h2><p>分數與進度同步更新；同分時不以手速作主要競爭。</p></article>
+          <article class="mini-card"><span class="feature-icon">📖</span><h2>整個系列共用</h2><p>每課只需在題庫檔新增題目，不用重新製作網站。</p></article>
+        </div>
+      </section>
+
+      <section class="screen" id="hostSetupScreen">
+        <div class="narrow-card card">
+          <button class="back-button" data-back-home type="button">← 返回</button>
+          <p class="eyebrow">主持人模式</p>
+          <h1>建立問答房間</h1>
+          <label class="field-label" for="lessonSelect">選擇課堂</label>
+          <select id="lessonSelect" class="field-control"></select>
+          <p class="field-hint" id="lessonDescription"></p>
+          <button class="btn btn-primary btn-block" id="createRoom" type="button">建立房間</button>
+          <p class="notice" id="firebaseHostNotice" hidden>即時多人模式尚未設定 Firebase；可先使用首頁的「單機示範」測試題目。</p>
+        </div>
+      </section>
+
+      <section class="screen" id="hostRoomScreen">
+        <div class="host-header card">
+          <div><p class="eyebrow">主持人控制台</p><h1 id="hostLessonTitle">課堂名稱</h1></div>
+          <span class="room-status waiting" id="hostStatusBadge">等待中</span>
+        </div>
+        <div class="host-grid">
+          <section class="card room-code-card">
+            <p>房間碼</p><div class="room-code" id="hostRoomCode">------</div>
+            <p class="muted">團友可開啟連結，或自行輸入房間碼。</p>
+            <div class="copy-row"><input id="joinLink" class="field-control" readonly aria-label="加入連結"><button class="btn btn-secondary" id="copyJoinLink" type="button">複製連結</button></div>
+            <div class="host-actions"><button class="btn btn-primary" id="startRoom" type="button">開始問答</button><button class="btn btn-danger" id="closeRoom" type="button">結束本局</button><button class="btn btn-secondary" id="newRoom" type="button">建立新房間</button></div>
+          </section>
+          <section class="card">
+            <div class="section-heading"><div><p class="eyebrow">已加入</p><h2><span id="playerCount">0</span> 位參加者</h2></div></div>
+            <div class="participant-list" id="participantList"><p class="empty-state">暫時未有人加入。</p></div>
+          </section>
+        </div>
+        <section class="card leaderboard-card">
+          <div class="section-heading"><div><p class="eyebrow">LIVE</p><h2>即時排行榜</h2></div><span class="muted">按分數及完成進度排列</span></div>
+          <div id="hostLeaderboard" class="leaderboard"></div>
+        </section>
+      </section>
+
+      <section class="screen" id="joinScreen">
+        <div class="narrow-card card">
+          <button class="back-button" data-back-home type="button">← 返回</button>
+          <p class="eyebrow">參加者模式</p><h1>加入問答</h1>
+          <label class="field-label" for="joinRoomCode">房間碼</label>
+          <input id="joinRoomCode" class="field-control room-input" maxlength="6" autocomplete="off" autocapitalize="characters" placeholder="例如 MARK01">
+          <label class="field-label" for="nickname">暱稱</label>
+          <input id="nickname" class="field-control" maxlength="20" autocomplete="nickname" placeholder="只需暱稱，不要填電話或全名">
+          <button class="btn btn-primary btn-block" id="joinRoom" type="button">加入房間</button>
+          <p class="privacy-note">🔒 排行榜只顯示你輸入的暱稱、分數和完成進度。</p>
+        </div>
+      </section>
+
+      <section class="screen" id="waitingScreen">
+        <div class="waiting-card card"><div class="pulse-icon">⏳</div><p class="eyebrow">已加入房間 <span id="waitingRoomCode"></span></p><h1 id="waitingLessonTitle">等待主持人開始</h1><p id="waitingName" class="hero-copy"></p><div class="waiting-dots" aria-hidden="true"><span></span><span></span><span></span></div><p class="muted">主持人按「開始問答」後，題目會自動出現。</p></div>
+      </section>
+
+      <section class="screen" id="quizScreen">
+        <div class="quiz-layout">
+          <section class="card quiz-card">
+            <div class="quiz-topbar"><div><span class="eyebrow" id="quizLessonNumber">第一課</span><h1 id="quizLessonTitle">課堂名稱</h1></div><div class="score-chip"><span id="liveScore">0</span> 分</div></div>
+            <div class="progress-meta"><span>第 <strong id="questionCurrent">1</strong>／<span id="questionTotal">10</span> 題</span><span id="progressPercent">0%</span></div>
+            <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+            <div class="question-area"><p class="question-kicker" id="questionReference"></p><h2 id="questionText">題目載入中</h2><div class="options" id="optionList"></div></div>
+            <div class="feedback" id="feedbackBox" hidden aria-live="polite"><strong id="feedbackTitle"></strong><p id="feedbackText"></p></div>
+            <button class="btn btn-primary btn-block" id="nextQuestion" type="button" hidden>下一題</button>
+          </section>
+          <aside class="card live-panel"><div class="section-heading"><div><p class="eyebrow">LIVE</p><h2>排行榜</h2></div></div><div id="playerLeaderboard" class="leaderboard compact"></div></aside>
+        </div>
+      </section>
+
+      <section class="screen" id="resultScreen">
+        <div class="result-layout">
+          <section class="card result-card"><div class="result-icon" id="resultIcon">🎉</div><p class="eyebrow">完成本課問答</p><h1 id="resultHeading">做得好！</h1><div class="final-score"><strong id="finalScore">80</strong><span>／<span id="finalTotal">100</span> 分</span></div><p id="resultMessage" class="hero-copy"></p><div class="reward-badge" id="rewardBadge" hidden>⭐ 答中八成，獲得完成獎勵！</div><button class="btn btn-secondary" data-back-home type="button">返回首頁</button></section>
+          <section class="card leaderboard-card"><div class="section-heading"><div><p class="eyebrow">FINAL / LIVE</p><h2>排行榜</h2></div></div><div id="resultLeaderboard" class="leaderboard"></div></section>
+        </div>
+      </section>
+
+      <section class="screen" id="closedScreen"><div class="waiting-card card"><div class="pulse-icon">🔒</div><p class="eyebrow">本局已結束</p><h1>主持人已關閉問答</h1><p class="hero-copy">請向主持人索取新的房間碼。</p><button class="btn btn-secondary" data-back-home type="button">返回首頁</button></div></section>
+    </main>
+
+    <footer class="site-footer"><span>只使用暱稱，不收集電話或電郵。</span><span>MARK 行動查經</span></footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
