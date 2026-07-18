@@ -15,6 +15,6 @@ export const firebaseConfig = {
 
 export const isFirebaseConfigured =
   Boolean(firebaseConfig.apiKey) &&
-  !firebaseConfig.apiKey.includes("AIzaSyBCD3zeYdEU5QbQ6dhqbvgRRJWkl7wPEu4") &&
+  !firebaseConfig.apiKey.includes("PASTE_") &&
   Boolean(firebaseConfig.databaseURL) &&
-  !firebaseConfig.databaseURL.includes("https://mark-gospel-quiz-default-rtdb.asia-southeast1.firebasedatabase.app");
+  !firebaseConfig.databaseURL.includes("PASTE_");
